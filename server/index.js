@@ -1,9 +1,20 @@
 const express = require('express');
-require('dotenv').config();
+const dotenv = require('dotenv');
+const { graphqlHTTP } = require('express-graphql');
+const schema = require('./schema/schema');
+const app = express();
+dotenv.config();
 
 const port = process.env.PORT || 5000;
-const app = express();
+
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    graphiql: (process.env.NODE_ENV = 'development'),
+  })
+);
 
 app.listen(port, () => {
-  console.log(`Server is runiing on this ${port}`);
+  console.log(`Server is runing ${process.env.NODE_ENV} on this ${port}`);
 });
