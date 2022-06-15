@@ -15,6 +15,9 @@ app.use(
   })
 );
 
+app.get('/', (req, res) => {
+  res.send('Hello');
+});
 app.listen(port, () => {
   console.log(`Server is runing ${process.env.NODE_ENV} on this ${port}`);
 });
